@@ -21,10 +21,7 @@ const isLineWinning = (line: string[]): boolean => {
 };
 
 const checkHorizontal = (grid: Grid) => {
-  for (const row of grid) {
-    if (isLineWinning(row)) return true;
-  }
-  return false;
+  return grid.some(isLineWinning);
 };
 
 const checkVertical = (grid: Grid) => {
@@ -79,17 +76,15 @@ function App() {
   return (
     <div className='App'>
       <h1>Tic-Tac-Toe</h1>
-      {grid.map((row, r) => {
-        return (
-          <div key={r} className='row'>
-            {row.map((cell, c) => (
-              <div key={c} className='cell' onClick={() => handleClick(r, c)}>
-                {cell}
-              </div>
-            ))}
-          </div>
-        );
-      })}
+      {grid.map((row, r) => (
+        <div key={r} className='row'>
+          {row.map((cell, c) => (
+            <div key={c} className='cell' onClick={() => handleClick(r, c)}>
+              {cell}
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
