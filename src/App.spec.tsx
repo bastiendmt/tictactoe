@@ -1,10 +1,5 @@
 import { expect, test } from 'vitest';
-import {
-  Grid,
-  checkDiagonalDirection,
-  checkHorizontal,
-  checkVertical,
-} from './App';
+import { GRID_SIZE, Grid, checkForWin } from './App';
 
 /**
  * Dynamically creates a grid with a vertical or horizontal winning configuration
@@ -42,17 +37,17 @@ function createVerticalValidGrid(
 }
 
 test('horizontal function', () => {
-  const standardGrid = createVerticalValidGrid(4, 'horizontal');
-  expect(checkHorizontal(standardGrid)).toBe(false);
-  const winningGrid = createVerticalValidGrid(4, 'horizontal', 2);
-  expect(checkHorizontal(winningGrid)).toBeTruthy();
+  const standardGrid = createVerticalValidGrid(GRID_SIZE, 'horizontal');
+  expect(checkForWin(standardGrid)).toBe(false);
+  const winningGrid = createVerticalValidGrid(GRID_SIZE, 'horizontal', 2);
+  expect(checkForWin(winningGrid)).toBeTruthy();
 });
 
 test('vertical function', () => {
-  const standardGrid = createVerticalValidGrid(4, 'vertical');
-  expect(checkVertical(standardGrid)).toBe(false);
-  const winningGrid = createVerticalValidGrid(4, 'vertical', 2);
-  expect(checkVertical(winningGrid)).toBeTruthy();
+  const standardGrid = createVerticalValidGrid(GRID_SIZE, 'vertical');
+  expect(checkForWin(standardGrid)).toBe(false);
+  const winningGrid = createVerticalValidGrid(GRID_SIZE, 'vertical', 2);
+  expect(checkForWin(winningGrid)).toBeTruthy();
 });
 
 test('diagonal function', () => {
@@ -73,7 +68,7 @@ test('diagonal function', () => {
     ['X', 'h', 'i'],
   ];
 
-  expect(checkDiagonalDirection(baseGrid, 'leftToRight')).toBe(false);
-  expect(checkDiagonalDirection(LTRWinningGrid, 'leftToRight')).toBeTruthy();
-  expect(checkDiagonalDirection(RTLWinningGrid, 'rightToLeft')).toBeTruthy();
+  expect(checkForWin(baseGrid)).toBe(false);
+  expect(checkForWin(LTRWinningGrid)).toBeTruthy();
+  expect(checkForWin(RTLWinningGrid)).toBeTruthy();
 });

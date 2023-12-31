@@ -14,7 +14,7 @@ const generateGrid = (size: number): Grid => {
   return grid;
 };
 
-export const checkHorizontal = (grid: Grid) => {
+const checkHorizontal = (grid: Grid) => {
   for (const row of grid) {
     const target = row[0];
     if (row.every((cell) => cell === target) && target !== undefined) {
@@ -24,7 +24,7 @@ export const checkHorizontal = (grid: Grid) => {
   return false;
 };
 
-export const checkVertical = (grid: Grid) => {
+const checkVertical = (grid: Grid) => {
   for (let i = 0; i < grid.length; i++) {
     let column: string[] = [];
     for (let j = 0; j < grid.length; j++) {
@@ -38,7 +38,7 @@ export const checkVertical = (grid: Grid) => {
   return false;
 };
 
-export const checkDiagonalDirection = (
+const checkDiagonalDirection = (
   grid: Grid,
   direction: 'leftToRight' | 'rightToLeft'
 ): boolean => {
@@ -60,7 +60,7 @@ export const checkDiagonal = (grid: Grid): boolean => {
   );
 };
 
-const checkForWin = (grid: Grid) => {
+export const checkForWin = (grid: Grid) => {
   return checkHorizontal(grid) || checkVertical(grid) || checkDiagonal(grid);
 };
 
