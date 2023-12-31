@@ -7,7 +7,7 @@ import { GRID_SIZE, Grid, checkForWin } from './App';
  * @param winningDirection Direction of the winning grid
  * @param validIndex Index of the column to put 'X'
  */
-function createVerticalValidGrid(
+function createValidGrid(
   gridSize: number,
   winningDirection: 'horizontal' | 'vertical',
   validIndex = -1
@@ -37,16 +37,16 @@ function createVerticalValidGrid(
 }
 
 test('horizontal function', () => {
-  const standardGrid = createVerticalValidGrid(GRID_SIZE, 'horizontal');
+  const standardGrid = createValidGrid(GRID_SIZE, 'horizontal');
   expect(checkForWin(standardGrid)).toBe(false);
-  const winningGrid = createVerticalValidGrid(GRID_SIZE, 'horizontal', 2);
+  const winningGrid = createValidGrid(GRID_SIZE, 'horizontal', 2);
   expect(checkForWin(winningGrid)).toBeTruthy();
 });
 
 test('vertical function', () => {
-  const standardGrid = createVerticalValidGrid(GRID_SIZE, 'vertical');
+  const standardGrid = createValidGrid(GRID_SIZE, 'vertical');
   expect(checkForWin(standardGrid)).toBe(false);
-  const winningGrid = createVerticalValidGrid(GRID_SIZE, 'vertical', 2);
+  const winningGrid = createValidGrid(GRID_SIZE, 'vertical', 2);
   expect(checkForWin(winningGrid)).toBeTruthy();
 });
 
