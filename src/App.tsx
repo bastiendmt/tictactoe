@@ -14,12 +14,15 @@ const generateGrid = (size: number): Grid => {
   return grid;
 };
 
+/** Checks in an array that all elements are the same */
+const isLineWinning = (line: string[]): boolean => {
+  const target = line[0];
+  return target !== undefined && line.every((cell) => cell === target);
+};
+
 const checkHorizontal = (grid: Grid) => {
   for (const row of grid) {
-    const target = row[0];
-    if (row.every((cell) => cell === target) && target !== undefined) {
-      return true;
-    }
+    if (isLineWinning(row)) return true;
   }
   return false;
 };
@@ -27,13 +30,10 @@ const checkHorizontal = (grid: Grid) => {
 const checkVertical = (grid: Grid) => {
   for (let i = 0; i < grid.length; i++) {
     let column: string[] = [];
-    for (let j = 0; j < grid.length; j++) {
-      column.push(grid[j][i]);
+    for (const row of grid) {
+      column.push(row[i]);
     }
-    const target = column[0];
-    if (column.every((cell) => cell === target) && target !== undefined) {
-      return true;
-    }
+    if (isLineWinning(column)) return true;
   }
   return false;
 };
@@ -49,11 +49,10 @@ const checkDiagonalDirection = (
     diagonal.push(grid[i][diagonalIndex]);
   }
 
-  const target = diagonal[0];
-  return diagonal.every((cell) => cell === target) && target !== undefined;
+  return isLineWinning(diagonal);
 };
 
-export const checkDiagonal = (grid: Grid): boolean => {
+const checkDiagonal = (grid: Grid): boolean => {
   return (
     checkDiagonalDirection(grid, 'leftToRight') ||
     checkDiagonalDirection(grid, 'rightToLeft')
